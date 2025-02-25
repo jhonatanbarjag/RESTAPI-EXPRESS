@@ -11,7 +11,6 @@ const config = {
         rejectUnauthorized: false
     }
 };
-
 //validar conexion
 export async function Conectar(){
     const cliente = new Client(config);
@@ -26,54 +25,4 @@ export async function Conectar(){
 
 }
 
-export async function ConsultarUsers() {
-    const cliente = new Client(config);
-    try {
-        await cliente.connect();
-        const res = await cliente.query('SELECT * FROM users');
-        return res.rows;     
-    }catch (error) {
-        console.error(error);
-    }
-}
-
-export async function ConsultarUser(id) {
-    const cliente = new Client(config);
-    try {
-        await cliente.connect();
-        const res = await cliente.query('SELECT * FROM users WHERE id = $1', [id]);
-
-        if (res.rows.length === 0) {
-            return {message: "No se encontro el usuario"};
-        }
-        return res.rows;    
-    }catch (error) {
-        console.error(error);
-    }
-}
-
-export async function CreateUser(data) {
-    const cliente = new Client(config);
-    try {
-        await cliente.connect();
-        const {rows} = await cliente.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [data.name, data.email]);
-        return rows[0];
-    }catch (error) {
-        console.error(error);
-    }
-}
-
-export async function DeleteUser(id) {
-    const cliente = new Client(config);
-    try {
-        await cliente.connect();
-        const {rows,rowCount}= await cliente.query('DELETE FROM users WHERE id = $1 RETURNING *' , [id]);
-        
-        if (rowCount === 0) {
-            return {message: "No se encontro el usuario"};
-        }
-        return rows[0];
-    }catch (error) {
-        console.error(error);
-    }
-}
+export default config;
