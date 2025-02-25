@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { ConsultarUsers } from '../services/conexion.js';
 import { ConsultarUser } from '../services/conexion.js';
+import { DeleteUser } from "../services/conexion.js";
+import { CreateUser } from "../services/conexion.js";
+
 
 const router = Router();
 
@@ -13,16 +16,22 @@ router.get('/users', async (req, res) => {
     res.status(200).json(users);
 });
 
-router.get("/users/:id", async (req, res) => {
+router.get("/user/:id", async (req, res) => {
     const { id } = req.params;
     const users = await ConsultarUser(id);
     res.status(200).json(users);
 })
-router.post("/user", (req, res) => {
-    res.send("creando usuario");    
+router.post("/users", async (req, res) => {
+    const data = req.body;
+    const users = await CreateUser(data);
+    res.status(200).json(users);
+    
+
 })
-router.delete("/user/:id", (req, res) => {
-    res.send("eliminando usuario");
+router.delete("/user/:id", async(req, res) => {
+    const { id } = req.params;
+    const users = await DeleteUser(id);
+    res.status(200).json(users);
 })
 router.put("/user/:id", (req, res) => {
     const { id } = req.params;

@@ -6,6 +6,8 @@ import { Conectar } from './src/services/conexion.js';
 
 const app = express(); 
 
+app.use(express.json());
+
 app.use(router);
 
 
