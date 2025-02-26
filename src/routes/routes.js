@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ConsultarUsers , ConsultarUser, DeleteUser, CreateUser, UpdateUser } from '../controllers/user.controllers.js';
-import { UniqueConstraintError } from'sequelize';
+
 
 const router = Router();
 
@@ -23,8 +23,10 @@ router.post("/users", async (req, res) => {
         const data = req.body;
         const user = await CreateUser(data);
         res.status(201).json(user);
+        
     } catch (error) {
-        if (error instanceof UniqueConstraintError) {
+        console.error(error);
+        if (error?.code === '23505') {
             return res.status(409).json({ message: "El correo ya está registrado" });
         }
         console.error(error);

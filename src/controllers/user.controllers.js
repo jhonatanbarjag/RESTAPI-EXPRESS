@@ -36,17 +36,11 @@ export async function CreateUser(data) {
     try {
         // Intenta conectar al cliente de PostgreSQL usando la configuración proporcionada
         await cliente.connect();
-
-        // Ejecuta una consulta SQL para insertar un nuevo usuario en la tabla 'users'
-        // Los valores de 'name' y 'email' se pasan como parámetros para evitar inyecciones SQL
         const { rows } = await cliente.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [data.name, data.email]);
-
         // Devuelve la primera fila del resultado de la consulta, que contiene el usuario recién creado
         return rows[0];
     } catch (error) {
-        // Si ocurre un error durante la conexión o la consulta, se captura aquí
         console.error(error);
-
         // Lanza el error para que pueda ser manejado por el bloque 'catch' en la ruta correspondiente
         throw error;
     } finally {
