@@ -9,6 +9,61 @@
 </head>
 <body>
     <%- include('partials/navigation') %>
+
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="cold-md-7">  
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>n°</th>
+                            <th> name</th>
+                            <th>email</th>
+                            <th>Actions</th>
+                        </tr>          
+
+                    </thead>
+                    <tbody>
+                        <% if(data) { %>
+                            <% for (let i = 0; i < data.length; i++) { %>
+                                <tr>
+                                    <td><%= (i + 1) %></td>
+                                    
+                                </tr>
+                        
+                            <% } %>
+                        <% } %>    
+
+                    </tbody>
+
+                </table>           
+            </div>
+
+            <div class="cold-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/add" method="post">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Name" class="form-control">      
+                            </div>
+                            <div class="form-group">
+                                
+                                <input type="text" name="email" placeholder="Email" class="form-control">            
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Save cliente
+                            </button>            
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
     
 </body>
 </html>

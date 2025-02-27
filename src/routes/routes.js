@@ -14,6 +14,8 @@ router.get("/contact", (req, res) => res.render("contactanos", {title :"contacto
 router.get('/users', async (req, res) => {
     const users = await ConsultarUsers();
     res.status(200).json(users);
+    
+
 });
 
 router.get("/user/:id", async (req, res) => {
