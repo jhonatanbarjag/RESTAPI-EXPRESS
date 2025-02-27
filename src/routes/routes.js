@@ -2,12 +2,15 @@ import { Router } from "express";
 import { ConsultarUsers , ConsultarUser, DeleteUser, CreateUser, UpdateUser } from '../controllers/user.controllers.js';
 
 
+
 const router = Router();
 
-//router.get("/users", async (req, res) => {
-//    const {rows} = await cliente.query("SELECT * FROM users");
-//    res.json(rows);
-//})
+router.get("/", (req, res) => res.render("index", {title :"inicio"}));
+router.get("/about", (req, res) => res.render("sobrenosotros", {title :"sobre nosotros"}));
+router.get("/contact", (req, res) => res.render("contactanos", {title :"contacto"}));
+
+
+
 router.get('/users', async (req, res) => {
     const users = await ConsultarUsers();
     res.status(200).json(users);
