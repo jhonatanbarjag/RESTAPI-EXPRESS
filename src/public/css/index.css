@@ -1,0 +1,24 @@
+#mostrarUsuariosDiv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#mostrarUsuariosDiv .card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    width: calc(33.333% - 20px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#mostrarUsuariosDiv .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+#mostrarUsuariosDiv .card-text {
+    font-size: 1rem;
+    color: #555;
+}

@@ -5,14 +5,24 @@ import { ConsultarUsers , ConsultarUser, DeleteUser, CreateUser, UpdateUser } fr
 
 const router = Router();
 
-router.get("/", (req, res) => res.render("index", {title :"inicio"}));
-router.get("/about", (req, res) => res.render("sobrenosotros", {title :"sobre nosotros"}));
-router.get("/contact", (req, res) => res.render("contactanos", {title :"contacto"}));
+//router.get("/", (req, res) => res.render("index", {title :"inicio"}));
+router.get("/", async (req, res) => {
+    const users = await ConsultarUsers();
+    res.render("index", { title: "inicio", users: users });
+});
+
+
+router.get("/edit", (req, res) => res.render("edit", {title :"editar"}));
+
+
+
+router.get("/delete", (req, res) => res.render("delete", {title :"eliminar"}));
+
 
 
 
 router.get('/users', async (req, res) => {
-    const users = await ConsultarUsers();
+   const users = await ConsultarUsers();
     res.status(200).json(users);
     
 
